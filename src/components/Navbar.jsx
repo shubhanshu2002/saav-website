@@ -22,12 +22,19 @@ const Navbar = () => {
   /* ---------- SCROLL HANDLER ---------- */
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80); // threshold
+      setScrolled(window.scrollY > 80);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  /* ---------- CLOSE MOBILE MENU ON ROUTE CHANGE ---------- */
+  useEffect(() => {
+    setIsOpen(false);
+    setServicesOpenMobile(false);
+    setCompanyOpenMobile(false);
+  }, [location.pathname]);
 
   /* ---------- DESKTOP HANDLERS ---------- */
   const openServicesDesktop = () => {
@@ -55,8 +62,8 @@ const Navbar = () => {
     setCompanyOpenMobile(false);
   };
 
-  /* ---------- ALWAYS SOLID BACKGROUND ON CERTAIN PAGES ---------- */
-  const alwaysBgPages = ["/contact","/industries","/capabilities"];
+  /* ---------- ALWAYS SOLID BG ---------- */
+  const alwaysBgPages = ["/contact", "/industries", "/capabilities"];
   const isAlwaysBg = alwaysBgPages.includes(location.pathname);
 
   return (
@@ -64,10 +71,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
       ${scrolled || isAlwaysBg ? "bg-black shadow-lg" : "bg-transparent"}`}
     >
-      <nav
-        aria-label="Main Navigation"
-        className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
-      >
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* LOGO */}
         <NavLink
           to="/"
@@ -80,7 +84,6 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         <ul className="hidden md:flex items-center gap-12 text-lg font-medium">
-          {/* HOME */}
           <li className="relative group">
             <NavLink to="/" end className="text-white">
               Home
@@ -93,8 +96,6 @@ const Navbar = () => {
             className="relative group"
             onMouseEnter={openServicesDesktop}
             onMouseLeave={() => closeDesktopMenu(setServicesOpenDesktop)}
-            aria-haspopup="true"
-            aria-expanded={servicesOpenDesktop}
           >
             <NavLink to="/industries" className="text-white">
               Services
@@ -129,8 +130,6 @@ const Navbar = () => {
             className="relative group"
             onMouseEnter={openCompanyDesktop}
             onMouseLeave={() => closeDesktopMenu(setCompanyOpenDesktop)}
-            aria-haspopup="true"
-            aria-expanded={companyOpenDesktop}
           >
             <NavLink to="/ourcompany" className="text-white">
               Company
@@ -141,8 +140,6 @@ const Navbar = () => {
               <div
                 className="absolute top-full left-0 mt-3 w-64 rounded-xl bg-[#020617]
                 border border-white/10 shadow-2xl"
-                onMouseEnter={openCompanyDesktop}
-                onMouseLeave={() => closeDesktopMenu(setCompanyOpenDesktop)}
               >
                 <NavLink
                   to="/ourcompany#mission"
@@ -166,15 +163,6 @@ const Navbar = () => {
             )}
           </li>
 
-          {/* CAREERS */}
-          {/* <li className="relative group">
-            <NavLink to="/careers" className="text-white">
-              Careers
-            </NavLink>
-            <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
-          </li> */}
-
-          {/* CONTACT */}
           <li className="relative group">
             <NavLink to="/contact" className="text-white">
               Contact
@@ -185,12 +173,11 @@ const Navbar = () => {
 
         {/* MOBILE BUTTON */}
         <button
-          className="md:hidden text-white text-3xl"
-          aria-controls="mobile-menu"
+          className="md:hidden text-white text-3xl z-50"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
         >
-          ☰
+          {isOpen ? "✕" : "☰"}
         </button>
       </nav>
 
@@ -198,9 +185,15 @@ const Navbar = () => {
       {isOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden bg-[#020617]/95 backdrop-blur-xl px-6 pb-6"
+          className="
+            fixed inset-0 top-[66px]
+            md:hidden
+            bg-[#020617]/95 backdrop-blur-xl
+            px-6 py-8
+            overflow-y-auto
+          "
         >
-          <ul className="flex flex-col gap-6 text-lg font-medium text-white mt-4">
+          <ul className="flex flex-col gap-6 text-lg font-medium text-white">
             <NavLink to="/" end onClick={closeMobileMenu}>
               Home
             </NavLink>
@@ -214,6 +207,7 @@ const Navbar = () => {
             >
               Services
             </button>
+
             {servicesOpenMobile && (
               <div className="ml-4 flex flex-col gap-3 text-slate-300">
                 <NavLink to="/industries" onClick={closeMobileMenu}>
@@ -234,6 +228,7 @@ const Navbar = () => {
             >
               Company
             </button>
+
             {companyOpenMobile && (
               <div className="ml-4 flex flex-col gap-3 text-slate-300">
                 <NavLink to="/ourcompany#mission" onClick={closeMobileMenu}>
@@ -248,9 +243,6 @@ const Navbar = () => {
               </div>
             )}
 
-            <NavLink to="/careers" onClick={closeMobileMenu}>
-              Careers
-            </NavLink>
             <NavLink to="/contact" onClick={closeMobileMenu}>
               Contact
             </NavLink>
