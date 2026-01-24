@@ -1,0 +1,96 @@
+jrvs-like-fullstack/
+│
+├── client/                        # FRONTEND (React)
+│   ├── public/
+│   │   ├── images/
+│   │   │   ├── hero/
+│   │   │   ├── services/
+│   │   │   └── clients/
+│   │   │
+│   │   └── favicon.ico
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── common/
+│   │   │   │   ├── Navbar.jsx
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── Button.jsx
+│   │   │   │
+│   │   │   ├── home/
+│   │   │   │   ├── Hero.jsx
+│   │   │   │   ├── ServicesPreview.jsx
+│   │   │   │   └── Clients.jsx
+│   │   │   │
+│   │   │   ├── services/
+│   │   │   │   └── ServiceCard.jsx
+│   │   │   │
+│   │   │   └── insights/
+│   │   │       └── BlogCard.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── About.jsx
+│   │   │   ├── Services.jsx
+│   │   │   ├── Insights.jsx
+│   │   │   ├── Careers.jsx
+│   │   │   ├── Contact.jsx
+│   │   │   └── NotFound.jsx
+│   │   │
+│   │   ├── layouts/
+│   │   │   └── MainLayout.jsx
+│   │   │
+│   │   ├── routes/
+│   │   │   └── AppRoutes.jsx
+│   │   │
+│   │   ├── services/
+│   │   │   ├── api.js              # Axios config
+│   │   │   └── contactService.js
+│   │   │
+│   │   ├── hooks/
+│   │   │   └── useScrollAnimation.js
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── global.css
+│   │   │   └── components.css
+│   │   │
+│   │   ├── App.jsx
+│   │   │
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/                        # BACKEND (Express)
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── db.js               # Database connection
+│   │   │   └── env.js
+│   │   │
+│   │   ├── models/
+│   │   │   ├── Contact.js
+│   │   │   └── Career.js
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── contactController.js
+│   │   │   └── careerController.js
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── contactRoutes.js
+│   │   │   └── careerRoutes.js
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── errorHandler.js
+│   │   │   └── cors.js
+│   │   │
+│   │   ├── utils/
+│   │   │   └── sendEmail.js
+│   │   │
+│   │   ├── app.js                  # Express app
+│   │   └── server.js               # Server start
+│   │
+│   ├── package.json
+│   └── .env
+│
+├── .gitignore
+├── README.md
+└── package.json                    # Root (optional)
