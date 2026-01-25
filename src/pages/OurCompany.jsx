@@ -1,32 +1,35 @@
-import missionImg from "../assets/company/mission.png";
-import approachImg from "../assets/company/approach.png";
+import missionImg from "../assets/company/mission.webp";
+import approachImg from "../assets/company/approach.webp";
 import ourCompanyImg from "../assets/company/ourcompany.png";
 
 const OurCompany = () => {
   return (
     <main className="bg-slate-50 text-slate-900">
 
-
-      {/* HERO */}
-{/* HERO */}
+    {/* HERO */}
 <section className="relative w-full">
-  <div className="relative w-full h-64 md:h-80 lg:h-96">
-    {/* Background image */}
-    <img
-      src={ourCompanyImg}
-      alt="SAAV Consulting"
-      className="w-full h-full object-cover object-center rounded-none"
-    />
-
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-slate-900/60" />
+  <div
+    className="
+      relative w-full
+      h-[60vh] md:h-[70vh] lg:h-[75vh]
+      bg-cover bg-center
+      flex items-center
+    "
+    style={{
+      backgroundImage: `url(${ourCompanyImg})`,
+      backgroundPosition: "center right", // 🔥 key fix
+    }}
+  >
+    {/* Dark overlay */}
+    <div className="absolute inset-0 bg-slate-900/65" />
 
     {/* Content */}
-    <div className="absolute inset-0 flex flex-col justify-center max-w-6xl mx-auto px-6">
-      <h1 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+    <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
         Our Company
       </h1>
-      <p className="text-base md:text-lg text-slate-200 max-w-3xl leading-relaxed">
+
+      <p className="text-lg md:text-xl text-slate-200 max-w-3xl leading-relaxed">
         SAAV Consulting is a technology consulting firm committed to helping
         organizations modernize, innovate, and grow through thoughtful use
         of IT, data, cloud, and artificial intelligence.
@@ -34,9 +37,6 @@ const OurCompany = () => {
     </div>
   </div>
 </section>
-
-
-
 
       {/* OUR MISSION */}
       <section id="mission" className="py-24 bg-white">

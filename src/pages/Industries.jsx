@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import fintechImg from "../assets/industries/fintech.png";
-import healthImg from "../assets/industries/health.png";
-import retailImg from "../assets/industries/retail.png";
-import utilitiesImg from "../assets/industries/utilities.png";
-import govImg from "../assets/industries/public.png";
-import saasImg from "../assets/industries/software.png";
+import fintechImg from "../assets/industries/fintech.webp";
+import healthImg from "../assets/industries/health.webp";
+import retailImg from "../assets/industries/retail.webp";
+import utilitiesImg from "../assets/industries/utilities.webp";
+import govImg from "../assets/industries/public.webp";
+import saasImg from "../assets/industries/software.webp";
 
 const industries = [
   {

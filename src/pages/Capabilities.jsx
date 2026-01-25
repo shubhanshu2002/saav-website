@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import infraImg from "../assets/capabilities/infrastructure.png";
-import cloudImg from "../assets/capabilities/cloud.png";
-import dataImg from "../assets/capabilities/data.png";
-import aiImg from "../assets/capabilities/ai.png";
-import pmImg from "../assets/capabilities/project-management.png";
+import infraImg from "../assets/capabilities/infrastructure.webp";
+import cloudImg from "../assets/capabilities/cloud.webp";
+import dataImg from "../assets/capabilities/data.webp";
+import aiImg from "../assets/capabilities/ai.webp";
+import pmImg from "../assets/capabilities/project-management.webp";
 
 const capabilityGroups = [
   {

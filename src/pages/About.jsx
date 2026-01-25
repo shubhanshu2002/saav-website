@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-import heroImg from "../assets/about/hero.png";
-import missionImg from "../assets/about/mission.png";
-import approachImg from "../assets/about/approach.png";
+import heroImg from "../assets/about/hero.webp";
+import missionImg from "../assets/about/mission.webp";
+import approachImg from "../assets/about/approach.webp";
 
 const About = () => {
   const [visible, setVisible] = useState(false);

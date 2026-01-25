@@ -24,10 +24,14 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  /* ---------- LOCK BODY SCROLL (MOBILE) ---------- */
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+  }, [isOpen]);
 
   /* ---------- CLOSE MOBILE MENU ON ROUTE CHANGE ---------- */
   useEffect(() => {
@@ -52,7 +56,7 @@ const Navbar = () => {
   const closeDesktopMenu = (setter) => {
     closeTimeoutRef.current = setTimeout(() => {
       setter(false);
-    }, 300);
+    }, 250);
   };
 
   /* ---------- MOBILE ---------- */
@@ -71,6 +75,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
       ${scrolled || isAlwaysBg ? "bg-black shadow-lg" : "bg-transparent"}`}
     >
+      {/* NAVBAR */}
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* LOGO */}
         <NavLink
@@ -104,21 +109,15 @@ const Navbar = () => {
 
             {servicesOpenDesktop && (
               <div
-                className="absolute top-full left-0 mt-3 w-56 rounded-xl bg-[#020617]
-                border border-white/10 shadow-2xl"
+                className="absolute top-full left-0 mt-3 w-56 rounded-xl
+                bg-[#020617] border border-white/10 shadow-2xl"
                 onMouseEnter={openServicesDesktop}
                 onMouseLeave={() => closeDesktopMenu(setServicesOpenDesktop)}
               >
-                <NavLink
-                  to="/industries"
-                  className="block px-5 py-3 text-slate-200 hover:bg-white/5"
-                >
+                <NavLink to="/industries" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
                   Industries
                 </NavLink>
-                <NavLink
-                  to="/capabilities"
-                  className="block px-5 py-3 text-slate-200 hover:bg-white/5"
-                >
+                <NavLink to="/capabilities" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
                   Capabilities
                 </NavLink>
               </div>
@@ -136,31 +135,22 @@ const Navbar = () => {
             </NavLink>
             <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
 
-            {companyOpenDesktop && (
+            {/* {companyOpenDesktop && (
               <div
-                className="absolute top-full left-0 mt-3 w-64 rounded-xl bg-[#020617]
-                border border-white/10 shadow-2xl"
+                className="absolute top-full left-0 mt-3 w-64 rounded-xl
+                bg-[#020617] border border-white/10 shadow-2xl"
               >
-                <NavLink
-                  to="/ourcompany#mission"
-                  className="block px-5 py-3 text-slate-200 hover:bg-white/5"
-                >
+                <NavLink to="/ourcompany#mission" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
                   Our Mission
                 </NavLink>
-                <NavLink
-                  to="/ourcompany#approach"
-                  className="block px-5 py-3 text-slate-200 hover:bg-white/5"
-                >
+                <NavLink to="/ourcompany#approach" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
                   Our Approach
                 </NavLink>
-                <NavLink
-                  to="/ourcompany#why"
-                  className="block px-5 py-3 text-slate-200 hover:bg-white/5"
-                >
+                <NavLink to="/ourcompany#why" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
                   Why Choose SAAV
                 </NavLink>
               </div>
-            )}
+            )} */}
           </li>
 
           <li className="relative group">
@@ -173,80 +163,86 @@ const Navbar = () => {
 
         {/* MOBILE BUTTON */}
         <button
-          className="md:hidden text-white text-3xl z-50"
+          className="md:hidden text-white text-3xl"
           aria-expanded={isOpen}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(true)}
         >
-          {isOpen ? "✕" : "☰"}
+          ☰
         </button>
       </nav>
 
       {/* MOBILE MENU */}
       {isOpen && (
-        <div
-          id="mobile-menu"
-          className="
-            fixed inset-0 top-[66px]
-            md:hidden
-            bg-[#020617]/95 backdrop-blur-xl
-            px-6 py-8
-            overflow-y-auto
-          "
-        >
-          <ul className="flex flex-col gap-6 text-lg font-medium text-white">
-            <NavLink to="/" end onClick={closeMobileMenu}>
-              Home
-            </NavLink>
-
+        <div className="fixed inset-0 z-50 md:hidden bg-[#020617] flex flex-col">
+          {/* MOBILE HEADER */}
+          <div className="flex items-center justify-between px-6 py-5 bg-[#020617]">
+            <span className="text-2xl font-semibold text-white">SAAV.</span>
             <button
-              className="text-left"
-              onClick={() => {
-                setServicesOpenMobile(!servicesOpenMobile);
-                setCompanyOpenMobile(false);
-              }}
+              onClick={closeMobileMenu}
+              className="text-3xl text-white"
+              aria-label="Close menu"
             >
-              Services
+              ✕
             </button>
+          </div>
 
-            {servicesOpenMobile && (
-              <div className="ml-4 flex flex-col gap-3 text-slate-300">
-                <NavLink to="/industries" onClick={closeMobileMenu}>
-                  Industries
-                </NavLink>
-                <NavLink to="/capabilities" onClick={closeMobileMenu}>
-                  Capabilities
-                </NavLink>
-              </div>
-            )}
+          {/* MOBILE LINKS */}
+          <div className="flex-1 px-6 py-10 overflow-y-auto">
+            <ul className="flex flex-col gap-8 text-xl font-medium text-white">
+              <NavLink to="/" end onClick={closeMobileMenu}>
+                Home
+              </NavLink>
 
-            <button
-              className="text-left"
-              onClick={() => {
-                setCompanyOpenMobile(!companyOpenMobile);
-                setServicesOpenMobile(false);
-              }}
-            >
-              Company
-            </button>
+              <button
+                className="text-left"
+                onClick={() => {
+                  setServicesOpenMobile(!servicesOpenMobile);
+                  setCompanyOpenMobile(false);
+                }}
+              >
+                Services
+              </button>
 
-            {companyOpenMobile && (
-              <div className="ml-4 flex flex-col gap-3 text-slate-300">
-                <NavLink to="/ourcompany#mission" onClick={closeMobileMenu}>
-                  Our Mission
-                </NavLink>
-                <NavLink to="/ourcompany#approach" onClick={closeMobileMenu}>
-                  Our Approach
-                </NavLink>
-                <NavLink to="/ourcompany#why" onClick={closeMobileMenu}>
-                  Why Choose SAAV
-                </NavLink>
-              </div>
-            )}
+              {servicesOpenMobile && (
+                <div className="ml-4 flex flex-col gap-3 text-slate-300 text-lg">
+                  <NavLink to="/industries" onClick={closeMobileMenu}>
+                    Industries
+                  </NavLink>
+                  <NavLink to="/capabilities" onClick={closeMobileMenu}>
+                    Capabilities
+                  </NavLink>
+                </div>
+              )}
 
-            <NavLink to="/contact" onClick={closeMobileMenu}>
-              Contact
-            </NavLink>
-          </ul>
+              <button
+                className="text-left"
+                onClick={() => {
+                  setCompanyOpenMobile(!companyOpenMobile);
+                  setServicesOpenMobile(false);
+                }}
+              >
+                Company
+              </button>
+
+              {companyOpenMobile && (
+                <div className="ml-4 flex flex-col gap-3 text-slate-300 text-lg">
+                  <NavLink to="/ourcompany#mission" onClick={closeMobileMenu}>
+                    Our Mission
+                  </NavLink>
+                  <NavLink to="/ourcompany#approach" onClick={closeMobileMenu}>
+                    Our Approach
+                  </NavLink>
+                  <NavLink to="/ourcompany#why" onClick={closeMobileMenu}>
+                    Why Choose SAAV
+                  </NavLink>
+                </div>
+              )}
+
+              <NavLink to="/contact" onClick={closeMobileMenu}>
+                Contact
+              </NavLink>
+            </ul>
+          </div>
         </div>
       )}
     </header>
