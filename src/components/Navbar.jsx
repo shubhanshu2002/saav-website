@@ -67,7 +67,7 @@ const Navbar = () => {
   };
 
   /* ---------- ALWAYS SOLID BG ---------- */
-  const alwaysBgPages = ["/contact", "/industries", "/capabilities"];
+  const alwaysBgPages = ["/contact", "/industries", "/capabilities","/careers"];
   const isAlwaysBg = alwaysBgPages.includes(location.pathname);
 
   return (
@@ -157,7 +157,8 @@ const Navbar = () => {
             <NavLink to="/contact" className="text-white">
               Contact
             </NavLink>
-            <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
+            <span className="absolute -bottom-1 left-0 h-[2px] 
+            bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
           </li>
         </ul>
 

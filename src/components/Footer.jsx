@@ -45,11 +45,11 @@ const Footer = () => {
                 Our Company
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/careers" className="hover:text-white transition">
                 Careers
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/contact" className="hover:text-white transition">
                 Contact
