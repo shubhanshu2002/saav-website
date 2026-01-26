@@ -62,12 +62,6 @@ const Contact = () => {
                   </a>
                 </li>
                 <li>
-                  <strong>Send Your Resume:</strong>{" "}
-                  <a href="mailto:projects@saavconsulting.ca?subject=Resume Submission" className="text-blue-600 hover:underline">
-                    Click here to email your resume
-                  </a>
-                </li>
-                <li>
                   <strong>Working Model:</strong> Remote & Client Locations
                 </li>
               </ul>
@@ -98,28 +92,6 @@ const Contact = () => {
                     />
                   </div>
                 ))}
-
-                {/* Dropdown Field */}
-                <div>
-                  <label htmlFor="role" className="block text-sm font-medium text-slate-700 mb-2">
-                    Role Interested In
-                  </label>
-                  <select
-                    id="role"
-                    name="role"
-                    required
-                    className="w-full border border-slate-300 rounded-md px-4 py-3 text-sm bg-white
-                      focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
-                  >
-                    <option value="">Select a role</option>
-                    <option>IT Consultant</option>
-                    <option>Cloud Architect</option>
-                    <option>Data Engineer</option>
-                    <option>AI / ML Engineer</option>
-                    <option>Business Analyst</option>
-                    <option>Other</option>
-                  </select>
-                </div>
 
                 {/* Message Field */}
                 <div>
