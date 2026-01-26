@@ -60,18 +60,39 @@ const Careers = () => {
   //   );
   // };
   
+  // const openForm = (role) => {
+  //   const email = "op@gmail.com";
+  //   const subject = `Application for ${role}`;
+  //   const body = `Hello,\n\nPlease find my resume attached for the role of ${role}.\n\nThank you.`;
+  
+  //   const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+  //     email
+  //   )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  //   window.open(gmailLink, "_blank");
+  // };
+
+  
+
   const openForm = (role) => {
-    const email = "urvisharma54@gmail.com";
+    const email = "op@gmail.com";
     const subject = `Application for ${role}`;
     const body = `Hello,\n\nPlease find my resume attached for the role of ${role}.\n\nThank you.`;
   
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-      email
-    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // Mobile check
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   
-    window.open(gmailLink, "_blank");
+    if (isMobile) {
+      // Mobile → use mailto
+      window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, "_self");
+    } else {
+      // Desktop → open Gmail web
+      const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+        email
+      )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailLink, "_blank");
+    }
   };
-
   
 
   return (
