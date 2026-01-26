@@ -214,16 +214,12 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button
-                className="text-left"
-                onClick={() => {
-                  setCompanyOpenMobile(!companyOpenMobile);
-                  setServicesOpenMobile(false);
-                  setCareersOpenMobile(false);
-                }}
-              >
-                Company
-              </button>
+<NavLink to="/ourcompany" className="text-white">
+              Company
+            </NavLink>
+
+
+
 
               <button
                 className="text-left"
