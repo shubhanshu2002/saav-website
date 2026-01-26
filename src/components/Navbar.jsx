@@ -217,10 +217,6 @@ const Navbar = () => {
 <NavLink to="/ourcompany" className="text-white">
               Company
             </NavLink>
-
-
-
-
               <button
                 className="text-left"
                 onClick={() => {
