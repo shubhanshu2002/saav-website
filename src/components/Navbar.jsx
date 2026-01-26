@@ -156,12 +156,18 @@ const Navbar = () => {
 
         {/* MOBILE BUTTON */}
         <button
-          className="md:hidden text-white text-3xl"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen(true)}
-        >
-          ☰
-        </button>
+  className="md:hidden text-white text-3xl"
+  aria-expanded={isOpen}
+  onClick={() => setIsOpen(true)}
+  style={{
+    position: "absolute",
+    right: "14px",
+    bottom: "17px",
+  }}
+>
+  ☰
+</button>
+
       </nav>
 
       {/* MOBILE MENU */}
@@ -198,11 +204,6 @@ const Navbar = () => {
               >
                 Services
               </button>
-              <NavLink to="/careers" end onClick={closeMobileMenu}>
-                Careers
-              </NavLink>
-              
-
               {servicesOpenMobile && (
                 <div className="ml-4 flex flex-col gap-3 text-slate-300 text-lg">
                   <NavLink to="/industries" onClick={closeMobileMenu}>
@@ -213,21 +214,17 @@ const Navbar = () => {
                   </NavLink>
                 </div>
               )}
+              <NavLink to="/careers" end onClick={closeMobileMenu}>
+                Careers
+              </NavLink>
+              
+
+             
 
 <NavLink to="/ourcompany" className="text-white">
               Company
             </NavLink>
-              <button
-                className="text-left"
-                onClick={() => {
-                  setCareersOpenMobile(!careersOpenMobile);
-                  setServicesOpenMobile(false);
-                  setCompanyOpenMobile(false);
-                }}
-              >
-                Careers
-              </button>
-
+        
               <NavLink to="/contact" onClick={closeMobileMenu}>
                 Contact
               </NavLink>
