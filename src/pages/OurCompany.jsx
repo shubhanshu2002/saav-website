@@ -1,7 +1,6 @@
 import missionImg from "../assets/company/mission.webp";
 import approachImg from "../assets/company/approach.webp";
-import ourCompanyImg from "../assets/company/ourcompany.png";
-import op from '../assets/company/ourcompany-test.jpg'; 
+import op from '../assets/company/ourcompany-test.webp'; 
 
 const OurCompany = () => {
   return (
