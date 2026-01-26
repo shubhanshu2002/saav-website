@@ -12,10 +12,12 @@ const Navbar = () => {
   // DESKTOP STATES
   const [servicesOpenDesktop, setServicesOpenDesktop] = useState(false);
   const [companyOpenDesktop, setCompanyOpenDesktop] = useState(false);
+  const [careersOpenDesktop, setCareersOpenDesktop] = useState(false); // NEW
 
   // MOBILE STATES
   const [servicesOpenMobile, setServicesOpenMobile] = useState(false);
   const [companyOpenMobile, setCompanyOpenMobile] = useState(false);
+  const [careersOpenMobile, setCareersOpenMobile] = useState(false); // NEW
 
   const closeTimeoutRef = useRef(null);
 
@@ -38,19 +40,29 @@ const Navbar = () => {
     setIsOpen(false);
     setServicesOpenMobile(false);
     setCompanyOpenMobile(false);
+    setCareersOpenMobile(false); // NEW
   }, [location.pathname]);
 
   /* ---------- DESKTOP HANDLERS ---------- */
   const openServicesDesktop = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setCompanyOpenDesktop(false);
+    setCareersOpenDesktop(false);
     setServicesOpenDesktop(true);
   };
 
   const openCompanyDesktop = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setServicesOpenDesktop(false);
+    setCareersOpenDesktop(false);
     setCompanyOpenDesktop(true);
+  };
+
+  const openCareersDesktop = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setServicesOpenDesktop(false);
+    setCompanyOpenDesktop(false);
+    setCareersOpenDesktop(true);
   };
 
   const closeDesktopMenu = (setter) => {
@@ -64,10 +76,11 @@ const Navbar = () => {
     setIsOpen(false);
     setServicesOpenMobile(false);
     setCompanyOpenMobile(false);
+    setCareersOpenMobile(false); // NEW
   };
 
   /* ---------- ALWAYS SOLID BG ---------- */
-  const alwaysBgPages = ["/contact", "/industries", "/capabilities","/careers"];
+  const alwaysBgPages = ["/contact", "/industries", "/capabilities", "/careers"];
   const isAlwaysBg = alwaysBgPages.includes(location.pathname);
 
   return (
@@ -106,22 +119,6 @@ const Navbar = () => {
               Services
             </NavLink>
             <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
-
-            {servicesOpenDesktop && (
-              <div
-                className="absolute top-full left-0 mt-3 w-56 rounded-xl
-                bg-[#020617] border border-white/10 shadow-2xl"
-                onMouseEnter={openServicesDesktop}
-                onMouseLeave={() => closeDesktopMenu(setServicesOpenDesktop)}
-              >
-                <NavLink to="/industries" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
-                  Industries
-                </NavLink>
-                <NavLink to="/capabilities" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
-                  Capabilities
-                </NavLink>
-              </div>
-            )}
           </li>
 
           {/* COMPANY */}
@@ -134,23 +131,18 @@ const Navbar = () => {
               Company
             </NavLink>
             <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
+          </li>
 
-            {/* {companyOpenDesktop && (
-              <div
-                className="absolute top-full left-0 mt-3 w-64 rounded-xl
-                bg-[#020617] border border-white/10 shadow-2xl"
-              >
-                <NavLink to="/ourcompany#mission" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
-                  Our Mission
-                </NavLink>
-                <NavLink to="/ourcompany#approach" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
-                  Our Approach
-                </NavLink>
-                <NavLink to="/ourcompany#why" className="block px-5 py-3 text-slate-200 hover:bg-white/5">
-                  Why Choose SAAV
-                </NavLink>
-              </div>
-            )} */}
+          {/* CAREERS */}
+          <li
+            className="relative group"
+            onMouseEnter={openCareersDesktop}
+            onMouseLeave={() => closeDesktopMenu(setCareersOpenDesktop)}
+          >
+            <NavLink to="/careers" className="text-white">
+              Careers
+            </NavLink>
+            <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
           </li>
 
           <li className="relative group">
@@ -199,6 +191,7 @@ const Navbar = () => {
                 onClick={() => {
                   setServicesOpenMobile(!servicesOpenMobile);
                   setCompanyOpenMobile(false);
+                  setCareersOpenMobile(false);
                 }}
               >
                 Services
@@ -220,24 +213,22 @@ const Navbar = () => {
                 onClick={() => {
                   setCompanyOpenMobile(!companyOpenMobile);
                   setServicesOpenMobile(false);
+                  setCareersOpenMobile(false);
                 }}
               >
                 Company
               </button>
 
-              {companyOpenMobile && (
-                <div className="ml-4 flex flex-col gap-3 text-slate-300 text-lg">
-                  <NavLink to="/ourcompany#mission" onClick={closeMobileMenu}>
-                    Our Mission
-                  </NavLink>
-                  <NavLink to="/ourcompany#approach" onClick={closeMobileMenu}>
-                    Our Approach
-                  </NavLink>
-                  <NavLink to="/ourcompany#why" onClick={closeMobileMenu}>
-                    Why Choose SAAV
-                  </NavLink>
-                </div>
-              )}
+              <button
+                className="text-left"
+                onClick={() => {
+                  setCareersOpenMobile(!careersOpenMobile);
+                  setServicesOpenMobile(false);
+                  setCompanyOpenMobile(false);
+                }}
+              >
+                Careers
+              </button>
 
               <NavLink to="/contact" onClick={closeMobileMenu}>
                 Contact
