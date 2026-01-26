@@ -186,6 +186,8 @@ const Navbar = () => {
                 Home
               </NavLink>
 
+
+
               <button
                 className="text-left"
                 onClick={() => {
@@ -196,6 +198,10 @@ const Navbar = () => {
               >
                 Services
               </button>
+              <NavLink to="/careers" end onClick={closeMobileMenu}>
+                Careers
+              </NavLink>
+              
 
               {servicesOpenMobile && (
                 <div className="ml-4 flex flex-col gap-3 text-slate-300 text-lg">

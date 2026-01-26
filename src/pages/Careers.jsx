@@ -41,17 +41,32 @@ const Careers = () => {
     });
   };
 
+  // const openForm = (role) => {
+  //   const formBaseUrl =
+  //     "https://docs.google.com/forms/d/e/1FAIpQLSfS5NsS07PUViVmIwS3OgxMKqS2TLrEDtY4Pm9Ixs2if2XNfw/viewform";
+  
+  //   const roleFieldId = "entry.1767431060";
+  
+  //   const url = `${formBaseUrl}?${roleFieldId}=${encodeURIComponent(role)}`;
+  
+  //   window.open(url, "_blank");
+  // };
+  
+
   const openForm = (role) => {
-    const formBaseUrl =
-      "https://docs.google.com/forms/d/e/1FAIpQLSfS5NsS07PUViVmIwS3OgxMKqS2TLrEDtY4Pm9Ixs2if2XNfw/viewform";
+    const email = "your.email@example.com";
+    const subject = `Application for ${role}`;
+    const body = `Hello,\n\nPlease find my resume attached for the role of ${role}.\n\nThank you.`;
   
-    const roleFieldId = "entry.1767431060";
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      email
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   
-    const url = `${formBaseUrl}?${roleFieldId}=${encodeURIComponent(role)}`;
-  
-    window.open(url, "_blank");
+    window.open(gmailLink, "_blank");
   };
+
   
+
   return (
     <section className="bg-slate-50 py-24 px-6">
       <div className="max-w-7xl mx-auto">
