@@ -14,7 +14,11 @@ const Navbar = () => {
   // MOBILE STATES
   const [servicesOpenMobile, setServicesOpenMobile] = useState(false);
 
+  // DESKTOP DROPDOWN STATE
+  const [servicesOpenDesktop, setServicesOpenDesktop] = useState(false);
+
   const closeTimeoutRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   /* ---------- SCROLL HANDLER ---------- */
   useEffect(() => {
@@ -28,7 +32,25 @@ const Navbar = () => {
   /* ---------- CLOSE MOBILE MENU ON ROUTE CHANGE ---------- */
   useEffect(() => {
     closeMobileMenu();
+    setServicesOpenDesktop(false);
   }, [location.pathname]);
+
+  /* ---------- CLICK OUTSIDE TO CLOSE ---------- */
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setServicesOpenDesktop(false);
+      }
+    };
+
+    if (servicesOpenDesktop) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [servicesOpenDesktop]);
 
   /* ---------- LOCK BODY SCROLL (MOBILE) ---------- */
   useEffect(() => {
@@ -90,55 +112,59 @@ const Navbar = () => {
           </li>
 
           {/* SERVICES */}
-          <li className="relative group">
+          <li className="relative" ref={dropdownRef}>
             {/* Trigger */}
-            <span className="relative inline-block text-white cursor-pointer pb-1">
+            <button
+              onClick={() => setServicesOpenDesktop(!servicesOpenDesktop)}
+              onMouseEnter={() => setServicesOpenDesktop(true)}
+              className="relative inline-block text-white cursor-pointer pb-1 group"
+            >
               Services
               {/* underline */}
               <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-            </span>
+            </button>
 
             {/* DROPDOWN */}
-            <div
-              className="
-                absolute left-1/2 top-full z-50 mt-4 w-56
-                -translate-x-1/2
-                rounded-xl bg-[#020617]
-                border border-white/10
-                shadow-xl
-                opacity-0 invisible
-                translate-y-2 scale-95
-                transition-all duration-200 ease-out
-                group-hover:visible
-                group-hover:opacity-100
-                group-hover:translate-y-0
-                group-hover:scale-100
-              "
-            >
-              <NavLink
-                to="/industries"
+            {servicesOpenDesktop && (
+              <div
                 className="
-                  block px-5 py-3 text-white
-                  hover:bg-blue-600/10
-                  transition-colors
-                  rounded-t-xl
+                  absolute left-1/2 top-full z-50 mt-4 w-56
+                  -translate-x-1/2
+                  rounded-xl bg-[#020617]
+                  border border-white/10
+                  shadow-xl
+                  animate-in fade-in slide-in-from-top-2
+                  duration-200
                 "
+                onMouseLeave={() => setServicesOpenDesktop(false)}
               >
-                Industries
-              </NavLink>
+                <NavLink
+                  to="/industries"
+                  onClick={() => setServicesOpenDesktop(false)}
+                  className="
+                    block px-5 py-3 text-white
+                    hover:bg-blue-600/10
+                    transition-colors
+                    rounded-t-xl
+                  "
+                >
+                  Industries
+                </NavLink>
 
-              <NavLink
-                to="/capabilities"
-                className="
-                  block px-5 py-3 text-white
-                  hover:bg-blue-600/10
-                  transition-colors
-                  rounded-b-xl
-                "
-              >
-                Capabilities
-              </NavLink>
-            </div>
+                <NavLink
+                  to="/capabilities"
+                  onClick={() => setServicesOpenDesktop(false)}
+                  className="
+                    block px-5 py-3 text-white
+                    hover:bg-blue-600/10
+                    transition-colors
+                    rounded-b-xl
+                  "
+                >
+                  Capabilities
+                </NavLink>
+              </div>
+            )}
           </li>
 
           {/* COMPANY */}
