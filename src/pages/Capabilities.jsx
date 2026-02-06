@@ -77,7 +77,7 @@ const Capabilities = () => {
       </Helmet>
 
       {/* PAGE INTRO */}
-      <section className="pt-32 pb-20" aria-label="Capabilities Overview">
+      {/* <section className="pt-32 pb-20" aria-label="Capabilities Overview">
         <div className="max-w-6xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-semibold mb-6">
             Our Capabilities
@@ -88,16 +88,30 @@ const Capabilities = () => {
             support business transformation and long-term growth.
           </p>
         </div>
-      </section>
+      </section> */}
+
+      {/* PAGE INTRO */}
+<section className="pt-32 pb-20" aria-label="Capabilities Overview">
+  <div className="max-w-7xl mx-auto px-6">
+    <h1 className="text-4xl md:text-5xl font-semibold mb-6">
+      Our Capabilities
+    </h1>
+    <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
+      SAAV Consulting delivers end-to-end technology capabilities across
+      strategy, cloud, data, artificial intelligence, and delivery to
+      support business transformation and long-term growth.
+    </p>
+  </div>
+</section>
 
       {/* CAPABILITIES GRID */}
       <section className="pb-32" aria-label="Capabilities List">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-10">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-start">
           {capabilityGroups.map((group) => (
             <div
               key={group.title}
               className="
-                w-full max-w-md
+                w-full 
                 bg-white border border-slate-200 rounded-xl overflow-hidden
                 transition-all duration-300
                 hover:shadow-lg hover:-translate-y-1

@@ -25,6 +25,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ---------- CLOSE MOBILE MENU ON ROUTE CHANGE ---------- */
+  useEffect(() => {
+    closeMobileMenu();
+  }, [location.pathname]);
+
   /* ---------- LOCK BODY SCROLL (MOBILE) ---------- */
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -73,8 +78,6 @@ const Navbar = () => {
           onClick={closeMobileMenu}
         >
           <img src={logo} alt="" className="w-[100px]" />
-
-          {/* Saav */}
         </NavLink>
 
         {/* DESKTOP NAV */}
@@ -87,57 +90,56 @@ const Navbar = () => {
           </li>
 
           {/* SERVICES */}
-          {/* SERVICES */}
           <li className="relative group">
-  {/* Trigger */}
-  <span className="relative inline-block text-white cursor-pointer pb-1">
-    Services
-    {/* underline */}
-    <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-  </span>
+            {/* Trigger */}
+            <span className="relative inline-block text-white cursor-pointer pb-1">
+              Services
+              {/* underline */}
+              <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+            </span>
 
-  {/* DROPDOWN */}
-  <div
-    className="
-      absolute left-1/2 top-full z-50 mt-4 w-56
-      -translate-x-1/2
-      rounded-xl bg-[#020617]
-      border border-white/10
-      shadow-xl
-      opacity-0 invisible
-      translate-y-2 scale-95
-      transition-all duration-200 ease-out
-      group-hover:visible
-      group-hover:opacity-100
-      group-hover:translate-y-0
-      group-hover:scale-100
-    "
-  >
-    <NavLink
-      to="/industries"
-      className="
-        block px-5 py-3 text-white
-        hover:bg-blue-600/10
-        transition-colors
-        rounded-t-xl
-      "
-    >
-      Industries
-    </NavLink>
+            {/* DROPDOWN */}
+            <div
+              className="
+                absolute left-1/2 top-full z-50 mt-4 w-56
+                -translate-x-1/2
+                rounded-xl bg-[#020617]
+                border border-white/10
+                shadow-xl
+                opacity-0 invisible
+                translate-y-2 scale-95
+                transition-all duration-200 ease-out
+                group-hover:visible
+                group-hover:opacity-100
+                group-hover:translate-y-0
+                group-hover:scale-100
+              "
+            >
+              <NavLink
+                to="/industries"
+                className="
+                  block px-5 py-3 text-white
+                  hover:bg-blue-600/10
+                  transition-colors
+                  rounded-t-xl
+                "
+              >
+                Industries
+              </NavLink>
 
-    <NavLink
-      to="/capabilities"
-      className="
-        block px-5 py-3 text-white
-        hover:bg-blue-600/10
-        transition-colors
-        rounded-b-xl
-      "
-    >
-      Capabilities
-    </NavLink>
-  </div>
-</li>
+              <NavLink
+                to="/capabilities"
+                className="
+                  block px-5 py-3 text-white
+                  hover:bg-blue-600/10
+                  transition-colors
+                  rounded-b-xl
+                "
+              >
+                Capabilities
+              </NavLink>
+            </div>
+          </li>
 
           {/* COMPANY */}
           <li className="relative group" onMouseEnter={openCompanyDesktop}>
@@ -186,7 +188,6 @@ const Navbar = () => {
         <div className="fixed inset-0 z-50 md:hidden bg-[#020617] flex flex-col">
           {/* MOBILE HEADER */}
           <div className="flex items-center justify-between px-6 py-5 bg-[#020617]">
-            {/* <span className="text-2xl font-semibold text-white">SAAV.</span> */}
             <img src={logo} alt="" className="w-[100px]" />
 
             <button
