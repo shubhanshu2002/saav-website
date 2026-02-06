@@ -40,7 +40,7 @@ const HeroSlider = () => {
   return (
     <section
       className="
-        relative h-[90vh] overflow-hidden
+        relative h-[80vh] overflow-hidden
         flex items-center justify-center
         bg-gradient-to-br from-slate-900 via-slate-800 to-black
       "
@@ -80,7 +80,7 @@ const HeroSlider = () => {
           {slides[current].subtitle}
         </p>
 
-        <div className="flex justify-center gap-4 animate-fadeUp delay-200">
+        {/* <div className="flex justify-center gap-4 animate-fadeUp delay-200">
           <Link
             to="/contact"
             className="px-6 py-3 rounded-xl
@@ -98,7 +98,7 @@ const HeroSlider = () => {
           >
             View Projects
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="absolute bottom-10 flex gap-3 z-10">

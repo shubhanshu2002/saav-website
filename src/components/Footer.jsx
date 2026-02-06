@@ -1,33 +1,23 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import logo from "../assets/logosaav.png";
+import { NavLink } from "react-router-dom";
+
 
 const Footer = () => {
   return (
     <footer className="bg-[#020617] text-slate-400 border-t border-white/10">
-      {/* <Helmet>
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "SAAV",
-              "url": "https://www.saav.com",
-              "logo": "https://www.saav.com/logo.png",
-              "sameAs": [
-                "https://www.linkedin.com/company/saav",
-                "https://twitter.com/saav"
-              ]
-            }
-          `}
-        </script>
-      </Helmet> */}
 
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* BRAND */}
         <div className="md:col-span-2">
-          <h2 className="text-xl font-semibold text-white tracking-wide">
-            SAAV.
-          </h2>
+
+        <NavLink
+          to="/"
+          end
+        >
+          <img src={logo} alt="" className="w-[100px]" />
+        </NavLink>
+
           <p className="mt-4 max-w-md text-sm leading-relaxed">
             We help businesses transform through modern technology, scalable
             systems, and strategic engineering solutions.

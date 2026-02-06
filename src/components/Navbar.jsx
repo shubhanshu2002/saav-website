@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
+import logo from "../assets/logosaav.png";
+
 const Navbar = () => {
   const location = useLocation();
 
@@ -9,15 +11,8 @@ const Navbar = () => {
   // SCROLL STATE
   const [scrolled, setScrolled] = useState(false);
 
-  // DESKTOP STATES
-  const [servicesOpenDesktop, setServicesOpenDesktop] = useState(false);
-  const [companyOpenDesktop, setCompanyOpenDesktop] = useState(false);
-  const [careersOpenDesktop, setCareersOpenDesktop] = useState(false); // NEW
-
   // MOBILE STATES
   const [servicesOpenMobile, setServicesOpenMobile] = useState(false);
-  const [companyOpenMobile, setCompanyOpenMobile] = useState(false);
-  const [careersOpenMobile, setCareersOpenMobile] = useState(false); // NEW
 
   const closeTimeoutRef = useRef(null);
 
@@ -35,52 +30,32 @@ const Navbar = () => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
-  /* ---------- CLOSE MOBILE MENU ON ROUTE CHANGE ---------- */
-  useEffect(() => {
-    setIsOpen(false);
-    setServicesOpenMobile(false);
-    setCompanyOpenMobile(false);
-    setCareersOpenMobile(false); // NEW
-  }, [location.pathname]);
-
   /* ---------- DESKTOP HANDLERS ---------- */
   const openServicesDesktop = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-    setCompanyOpenDesktop(false);
-    setCareersOpenDesktop(false);
-    setServicesOpenDesktop(true);
   };
 
   const openCompanyDesktop = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-    setServicesOpenDesktop(false);
-    setCareersOpenDesktop(false);
-    setCompanyOpenDesktop(true);
   };
 
   const openCareersDesktop = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-    setServicesOpenDesktop(false);
-    setCompanyOpenDesktop(false);
-    setCareersOpenDesktop(true);
-  };
-
-  const closeDesktopMenu = (setter) => {
-    closeTimeoutRef.current = setTimeout(() => {
-      setter(false);
-    }, 250);
   };
 
   /* ---------- MOBILE ---------- */
   const closeMobileMenu = () => {
     setIsOpen(false);
     setServicesOpenMobile(false);
-    setCompanyOpenMobile(false);
-    setCareersOpenMobile(false); // NEW
   };
 
   /* ---------- ALWAYS SOLID BG ---------- */
-  const alwaysBgPages = ["/contact", "/industries", "/capabilities", "/careers"];
+  const alwaysBgPages = [
+    "/contact",
+    "/industries",
+    "/capabilities",
+    "/careers",
+  ];
   const isAlwaysBg = alwaysBgPages.includes(location.pathname);
 
   return (
@@ -97,7 +72,9 @@ const Navbar = () => {
           className="text-2xl font-semibold text-blue-500"
           onClick={closeMobileMenu}
         >
-          SAAV.
+          <img src={logo} alt="" className="w-[100px]" />
+
+          {/* Saav */}
         </NavLink>
 
         {/* DESKTOP NAV */}
@@ -110,23 +87,60 @@ const Navbar = () => {
           </li>
 
           {/* SERVICES */}
-          <li
-            className="relative group"
-            onMouseEnter={openServicesDesktop}
-            onMouseLeave={() => closeDesktopMenu(setServicesOpenDesktop)}
-          >
-            <NavLink to="/industries" className="text-white">
-              Services
-            </NavLink>
-            <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
-          </li>
+          {/* SERVICES */}
+          <li className="relative group">
+  {/* Trigger */}
+  <span className="relative inline-block text-white cursor-pointer pb-1">
+    Services
+    {/* underline */}
+    <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+  </span>
+
+  {/* DROPDOWN */}
+  <div
+    className="
+      absolute left-1/2 top-full z-50 mt-4 w-56
+      -translate-x-1/2
+      rounded-xl bg-[#020617]
+      border border-white/10
+      shadow-xl
+      opacity-0 invisible
+      translate-y-2 scale-95
+      transition-all duration-200 ease-out
+      group-hover:visible
+      group-hover:opacity-100
+      group-hover:translate-y-0
+      group-hover:scale-100
+    "
+  >
+    <NavLink
+      to="/industries"
+      className="
+        block px-5 py-3 text-white
+        hover:bg-blue-600/10
+        transition-colors
+        rounded-t-xl
+      "
+    >
+      Industries
+    </NavLink>
+
+    <NavLink
+      to="/capabilities"
+      className="
+        block px-5 py-3 text-white
+        hover:bg-blue-600/10
+        transition-colors
+        rounded-b-xl
+      "
+    >
+      Capabilities
+    </NavLink>
+  </div>
+</li>
 
           {/* COMPANY */}
-          <li
-            className="relative group"
-            onMouseEnter={openCompanyDesktop}
-            onMouseLeave={() => closeDesktopMenu(setCompanyOpenDesktop)}
-          >
+          <li className="relative group" onMouseEnter={openCompanyDesktop}>
             <NavLink to="/ourcompany" className="text-white">
               Company
             </NavLink>
@@ -134,11 +148,7 @@ const Navbar = () => {
           </li>
 
           {/* CAREERS */}
-          <li
-            className="relative group"
-            onMouseEnter={openCareersDesktop}
-            onMouseLeave={() => closeDesktopMenu(setCareersOpenDesktop)}
-          >
+          <li className="relative group" onMouseEnter={openCareersDesktop}>
             <NavLink to="/careers" className="text-white">
               Careers
             </NavLink>
@@ -149,25 +159,26 @@ const Navbar = () => {
             <NavLink to="/contact" className="text-white">
               Contact
             </NavLink>
-            <span className="absolute -bottom-1 left-0 h-[2px] 
-            bg-blue-600 w-0 group-hover:w-full transition-all duration-300" />
+            <span
+              className="absolute -bottom-1 left-0 h-[2px] 
+            bg-blue-600 w-0 group-hover:w-full transition-all duration-300"
+            />
           </li>
         </ul>
 
         {/* MOBILE BUTTON */}
         <button
-  className="md:hidden text-white text-3xl"
-  aria-expanded={isOpen}
-  onClick={() => setIsOpen(true)}
-  style={{
-    position: "absolute",
-    right: "14px",
-    bottom: "17px",
-  }}
->
-  ☰
-</button>
-
+          className="md:hidden text-white text-3xl"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen(true)}
+          style={{
+            position: "absolute",
+            right: "14px",
+            bottom: "17px",
+          }}
+        >
+          ☰
+        </button>
       </nav>
 
       {/* MOBILE MENU */}
@@ -175,7 +186,9 @@ const Navbar = () => {
         <div className="fixed inset-0 z-50 md:hidden bg-[#020617] flex flex-col">
           {/* MOBILE HEADER */}
           <div className="flex items-center justify-between px-6 py-5 bg-[#020617]">
-            <span className="text-2xl font-semibold text-white">SAAV.</span>
+            {/* <span className="text-2xl font-semibold text-white">SAAV.</span> */}
+            <img src={logo} alt="" className="w-[100px]" />
+
             <button
               onClick={closeMobileMenu}
               className="text-3xl text-white"
@@ -192,14 +205,10 @@ const Navbar = () => {
                 Home
               </NavLink>
 
-
-
               <button
                 className="text-left"
                 onClick={() => {
                   setServicesOpenMobile(!servicesOpenMobile);
-                  setCompanyOpenMobile(false);
-                  setCareersOpenMobile(false);
                 }}
               >
                 Services
@@ -217,14 +226,15 @@ const Navbar = () => {
               <NavLink to="/careers" end onClick={closeMobileMenu}>
                 Careers
               </NavLink>
-              
 
-             
+              <NavLink
+                to="/ourcompany"
+                onClick={closeMobileMenu}
+                className="text-white"
+              >
+                Company
+              </NavLink>
 
-<NavLink to="/ourcompany" className="text-white">
-              Company
-            </NavLink>
-        
               <NavLink to="/contact" onClick={closeMobileMenu}>
                 Contact
               </NavLink>

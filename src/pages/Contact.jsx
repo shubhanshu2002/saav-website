@@ -57,8 +57,8 @@ const Contact = () => {
               <ul className="space-y-4 text-slate-700">
                 <li>
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:projects@saavconsulting.ca" className="text-blue-600 hover:underline">
-                    projects@saavconsulting.ca
+                  <a href="mailto:projects.saav@gmail.com" className="text-blue-600 hover:underline">
+                  projects.saav@gmail.com
                   </a>
                 </li>
                 <li>
